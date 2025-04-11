@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(warehouse_nav_pkg)
+project(warehouse_simulation_pkg)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -22,5 +22,14 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+install(DIRECTORY
+  launch
+  urdf
+  worlds
+  models
+  DESTINATION share/${PROJECT_NAME}
+)
+
 
 ament_package()

@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+    <!-- Include the warehouse model -->
+    <include>
+      <uri>model://warehouse</uri>
+    </include>
+    
+    <!-- Add a light -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+  </world>
+</sdf>
