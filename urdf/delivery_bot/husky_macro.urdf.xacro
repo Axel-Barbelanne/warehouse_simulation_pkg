@@ -18,12 +18,12 @@
   <xacro:arg name="urdf_extras" default="$(optenv CPR_URDF_EXTRAS empty.urdf)" />
 
   <!-- Included URDF/XACRO Files -->
-  <xacro:include filename="$(find husky_description)/urdf/decorations.urdf.xacro" />
-  <xacro:include filename="$(find husky_description)/urdf/wheel.urdf.xacro" />
+  <xacro:include filename="$(find warehouse_simulation_pkg)/urdf/delivery_bot/decorations.urdf.xacro" />
+  <xacro:include filename="$(find warehouse_simulation_pkg)/urdf/delivery_bot/wheel.urdf.xacro" />
 
-  <xacro:include filename="$(find husky_description)/urdf/accessories/intel_realsense.urdf.xacro"/>
-  <!-- <xacro:include filename="$(find husky_description)/urdf/accessories/sick_lms1xx_mount.urdf.xacro"/> -->
-  <xacro:include filename="$(find husky_description)/urdf/accessories/sensor_arch.urdf.xacro"/>
+  <xacro:include filename="$(find warehouse_simulation_pkg)/urdf/delivery_bot/accessories/intel_realsense.urdf.xacro"/>
+  <!-- <xacro:include filename="$(find warehouse_simulation_pkg)/urdf/delivery_bot/accessories/sick_lms1xx_mount.urdf.xacro"/> -->
+  <xacro:include filename="$(find warehouse_simulation_pkg)/urdf/delivery_bot/accessories/sensor_arch.urdf.xacro"/>
 
   <xacro:property name="M_PI" value="3.14159"/>
 
@@ -48,7 +48,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://husky_description/meshes/base_link.dae" />
+          <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/base_link.dae" />
         </geometry>
       </visual>
       <collision>
