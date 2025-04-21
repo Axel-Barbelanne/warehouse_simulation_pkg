@@ -4,22 +4,28 @@
   <!-- robot name parameter -->
   <!-- <xacro:arg name="name" default="" /> -->
 
+  <xacro:property name="mesh_path" value="$(find warehouse_simulation_pkg)/models/delivery_bot/" />
+
+
   <xacro:arg name="prefix" default="" />
   <!-- <xacro:arg name="gazebo_controllers" default="$(find husky_control)/config/control.yaml" /> -->
 
   <xacro:include filename="$(find warehouse_simulation_pkg)/urdf/delivery_bot/husky_macro.urdf.xacro" />
 
   <!-- Load husky description -->
-  <xacro:husky prefix="$(arg prefix)" />
+  <xacro:husky prefix="$(arg prefix)" mesh_path="${mesh_path}"/>
 
 
   <xacro:if value="$(arg is_sim)">
 
-    <!-- <gazebo>
+    <gazebo>
       <plugin name="$(arg prefix)gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-        <parameters>$(arg gazebo_controllers)</parameters>
+        <!-- <parameters>$(arg gazebo_controllers)</parameters> -->
+        <ros2_control>
+          <param>$(find warehouse_simulation_pkg)/config/empty_control.yaml</param>
+        </ros2_control>
       </plugin>
-    </gazebo> -->
+    </gazebo>
 
     <gazebo reference="$(arg prefix)imu_link">
       <sensor name="$(arg prefix)imu_sensor" type="imu">

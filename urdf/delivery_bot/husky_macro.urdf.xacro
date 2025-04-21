@@ -27,7 +27,7 @@
 
   <xacro:property name="M_PI" value="3.14159"/>
 
-  <xacro:macro name="husky" params="prefix">
+  <xacro:macro name="husky" params="prefix mesh_path">
 
     <!-- Base Size -->
     <xacro:property name="base_x_size" value="0.98740000" />
@@ -48,7 +48,8 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/base_link.dae" />
+          <mesh filename="${mesh_path}base_link.dae" />
+          <!-- <box size="0.9 0.5 0.2"/> -->
         </geometry>
       </visual>
       <collision>
@@ -109,20 +110,20 @@
 
 
     <!-- Husky wheel macros -->
-    <xacro:husky_wheel wheel_prefix="${prefix}front_left">
+    <xacro:husky_wheel wheel_prefix="${prefix}front_left" mesh_path="${mesh_path}">
       <origin xyz="${wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
     </xacro:husky_wheel>
-    <xacro:husky_wheel wheel_prefix="${prefix}front_right">
+    <xacro:husky_wheel wheel_prefix="${prefix}front_right" mesh_path="${mesh_path}">
       <origin xyz="${wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
     </xacro:husky_wheel>
-    <xacro:husky_wheel wheel_prefix="${prefix}rear_left">
+    <xacro:husky_wheel wheel_prefix="${prefix}rear_left" mesh_path="${mesh_path}">
       <origin xyz="${-wheelbase/2} ${track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
     </xacro:husky_wheel>
-    <xacro:husky_wheel wheel_prefix="${prefix}rear_right">
+    <xacro:husky_wheel wheel_prefix="${prefix}rear_right" mesh_path="${mesh_path}">
       <origin xyz="${-wheelbase/2} ${-track/2} ${wheel_vertical_offset}" rpy="0 0 0" />
     </xacro:husky_wheel>
 
-    <xacro:husky_decorate />
+    <xacro:husky_decorate mesh_path="${mesh_path}"/>
 
     <!-- <xacro:if value="$(arg laser_enabled)">
 

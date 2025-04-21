@@ -10,7 +10,7 @@
   <material name="white"><color rgba="1.0 1.0 1.0 1.0" /></material>
   <material name="red"><color rgba="1.0 0.0 0.0 1.0" /></material>
 
-  <xacro:macro name="husky_decorate">
+  <xacro:macro name="husky_decorate" params="mesh_path">
 
     <xacro:property name="husky_front_bumper_extend" value="$(optenv HUSKY_FRONT_BUMPER_EXTEND 0)" />
     <xacro:property name="husky_rear_bumper_extend" value="$(optenv HUSKY_REAR_BUMPER_EXTEND 0)" />
@@ -20,8 +20,9 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/top_chassis.dae" />
+          <mesh filename="${mesh_path}top_chassis.dae" />
         </geometry>
+        <material name="black"/>
       </visual>
     </link>
 
@@ -36,7 +37,7 @@
       <link name="user_rail_link">
         <visual>
           <geometry>
-            <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/user_rail.dae" />
+            <mesh filename="${mesh_path}user_rail.dae" />
           </geometry>
         </visual>
       </link>
@@ -53,7 +54,7 @@
     <link name="front_bumper_link">
       <visual>
         <geometry>
-          <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/bumper.dae" />
+          <mesh filename="${mesh_path}bumper.dae" />
         </geometry>
       </visual>
     </link>
@@ -69,7 +70,7 @@
       <link name="front_bumper_extension_link">
           <visual>
               <geometry>
-                  <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/bumper_extension.dae" />
+                  <mesh filename="${mesh_path}bumper_extension.dae" />
               </geometry>
           </visual>
       </link>
@@ -85,7 +86,7 @@
     <link name="rear_bumper_link">
       <visual>
         <geometry>
-          <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/bumper.dae" />
+          <mesh filename="${mesh_path}bumper.dae" />
         </geometry>
       </visual>
     </link>
@@ -101,7 +102,7 @@
       <link name="rear_bumper_extension_link">
           <visual>
               <geometry>
-                  <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/bumper_extension.dae" />
+                  <mesh filename="${mesh_path}bumper_extension.dae" />
               </geometry>
           </visual>
       </link>
@@ -120,13 +121,13 @@
           <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-              <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/large_top_plate.dae" />
+              <mesh filename="${mesh_path}large_top_plate.dae" />
             </geometry>
           </visual>
           <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-              <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/large_top_plate_collision.stl" />
+              <mesh filename="${mesh_path}large_top_plate_collision.dae" />
             </geometry>
           </collision>
         </link>
@@ -155,13 +156,13 @@
           <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-              <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/top_plate.dae" />
+              <mesh filename="${mesh_path}top_plate.dae" />
             </geometry>
           </visual>
           <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-              <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/top_plate.stl" />
+              <mesh filename="${mesh_path}top_plate.dae" />
             </geometry>
           </collision>
         </link>

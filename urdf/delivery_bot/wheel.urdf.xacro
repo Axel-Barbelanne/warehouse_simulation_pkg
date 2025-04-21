@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="husky_wheel">
 
-  <xacro:macro name="husky_wheel" params="wheel_prefix *joint_pose">
+  <xacro:macro name="husky_wheel" params="wheel_prefix mesh_path *joint_pose">
     <link name="${wheel_prefix}_wheel">
       <inertial>
         <mass value="2.637" />
@@ -12,7 +12,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://warehouse_simulation_pkg/modles/delivery_bot/wheel.dae" />
+          <mesh filename="${mesh_path}wheel.dae" />
         </geometry>
       </visual>
       <collision>

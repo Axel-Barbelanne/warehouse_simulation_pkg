@@ -11,6 +11,8 @@ def generate_launch_description():
     # Path configurations with error checking
     pkg_path = get_package_share_directory('warehouse_simulation_pkg')
     urdf_file = os.path.join(pkg_path, 'urdf', 'delivery_bot', 'husky.urdf.xacro')
+    urdf_extras_file = os.path.join(pkg_path, 'urdf', 'delivery_bot', 'empty.urdf')
+
     world_file = os.path.join(pkg_path, 'worlds', 'warehouse.world')
     
     # Verify files exist before launching
@@ -39,6 +41,13 @@ def generate_launch_description():
         description='Whether to launch RViz'
     )
 
+    is_sim = DeclareLaunchArgument(
+        'is_sim',
+        default_value='true',
+        description='Flag to indicate simulation mode'
+    )
+
+
     # Launch Gazebo with custom parameters
     gazebo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -58,10 +67,17 @@ def generate_launch_description():
         name='robot_state_publisher',
         output='screen',
         parameters=[{
-            'robot_description': Command(['xacro ', urdf_file]),
+            'robot_description': Command(['xacro ', urdf_file, ' is_sim:=true', ' urdf_extras:=', urdf_extras_file]),
             'use_sim_time': LaunchConfiguration('use_sim_time'),
             'publish_frequency': 30.0
         }]
+    )
+
+    joint_state_publisher_node = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        parameters=[{'use_sim_time': True}]
     )
     
     # Spawn Entity with conditional launching
@@ -82,6 +98,7 @@ def generate_launch_description():
         output='screen',
         condition=IfCondition(LaunchConfiguration('spawn_robot'))
     )
+
     
     ld = LaunchDescription([
         use_sim_time,
@@ -91,5 +108,6 @@ def generate_launch_description():
 
     ld.add_action(gazebo_launch)
     ld.add_action(robot_state_publisher_node)
+    ld.add_action(joint_state_publisher_node)
     ld.add_action(spawn_robot_node)
     return ld
